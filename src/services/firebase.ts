@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { FacebookAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDC0lI_aZB__xLGm9F5_h2kNNkn6YLuLHw",
+  apiKey: import.meta.env.VITE_FIREBASE_KEY,
   authDomain: "md5-project-866d4.firebaseapp.com",
   projectId: "md5-project-866d4",
   storageBucket: "md5-project-866d4.appspot.com",
