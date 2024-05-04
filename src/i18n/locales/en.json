@@ -1,0 +1,27 @@
+{
+    "translation": {
+        "auth_Home": "Home",
+        "auth_Login": "Login",
+        "auth_Signin": "Sign In",
+        "auth_Register": "Register",
+        "auth_Signup": "Sign Up",
+        "auth_Login_Sucess": "Login Success",
+        "auth_Register_Sucess": "Register Success",
+        "auth_Login_Fail": "Login Fail",
+        "auth_Register_Fail": "Register Fail",
+        "auth_Validate_Required": "Cannot be left blank",
+        "auth_Validate_Min3": "Must have at least 3 characters",
+        "auth_User_Not_Found": "User Not Found",
+        "auth_Password_Wrong": "Password is incorrect",
+        "auth_User_Name": "User Name",
+        "auth_Password": "Password",
+        "auth_Confirm_Password": "Confirm Password",
+        "auth_Acc": "Do not have an account?",
+        "auth_Password_Confirm": "Confirmation password is incorrect",
+        "auth_Email_Invalid": "Invalid email address",
+        "auth_Acc_Already":"Do you already have an account?",
+        "auth_Or_Join": "or join with",
+        "auth_Forgot_Password": "Forgot password?"
+
+    }
+}

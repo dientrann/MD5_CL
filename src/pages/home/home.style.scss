@@ -1,0 +1,193 @@
+header {
+    width: 100vw;
+    height: $heightHeader;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+
+    .bodyHeader {
+        width: $maxWidth;
+        background-color: blue;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logoHeader {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                height: 100%;
+            }
+        }
+
+        .navGlobal {
+
+            .listMenu {
+                display: flex;
+
+                .itemMenu {
+                    margin: 10px;
+                    padding: 0 10px;
+                    color: white;
+                    cursor: pointer;
+                    &:hover{
+                        color: aqua;
+                    }
+                }
+                .select{
+                    position: relative;
+                    color: red;
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        bottom: -5px;
+                        left: 0;
+                        width: 100%;
+                        height: 2px;
+                        background-color: black;
+                        animation: width 0.5s ease-in-out;
+                    }
+                }
+                
+            }
+        }
+
+        .search {
+            position: relative;
+
+            input {
+                height: 30px;
+                width: 200px;
+                border: none;
+                outline: none;
+                border-radius: 30px;
+                padding: 0 10px;
+                border: 1px solid gray;
+
+                &:focus {
+                    border: 1px solid aqua;
+                }
+            }
+
+            button {
+                position: absolute;
+                top: 1px;
+                right: 1px;
+                height: 28px;
+                width: 28px;
+                border: none;
+                border-radius: 50%;
+                border: 1px solid gray;
+                box-shadow: 0 0 5px gray;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+
+        .infoUser {
+            //width: 170px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 20px;
+            .cart{
+                position: relative;
+                span{
+                    padding: 2px 3px;
+                    position: absolute;
+                    background-color: red;
+                    color: white;
+                    border-radius: 50%;
+                    font-size: 10px;
+                    top: -7px;
+                    right: -4px;
+                }
+                svg{
+                    cursor: pointer;
+                }
+    
+            }
+            button {
+                height: 30px;
+                width: 70px;
+                border-radius: 30px;
+                border: none;
+                border: 1px solid gray;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    svg {
+                        animation: bigGoRight 1s infinite alternate;
+                    }
+                }
+            }
+
+            .userInfo {
+                display: flex;
+                justify-content: flex-end;
+                position: relative;
+
+                .menu {
+                    width: 150px;
+                    position: absolute;
+                    top: 22px;
+                    right: 0;
+                    padding: 5px;
+                    border-radius: 10px;
+                    background-color: rgb(225, 225, 225);
+                    animation: slideInFromTop 1s linear ;
+                    z-index: 100;
+                    overflow: hidden;
+                    font-size: 16px;
+
+                    .itemMenu {
+                        width: 100%;
+                        height: 30px;
+                        border-bottom: 1px solid gray;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        transition: transform 0.3s ease;
+
+                        &:hover {
+                            svg {
+                                transform: scale(1.2);
+                            }
+                            span{
+                                color: rgb(0, 247, 255);
+                            }
+                        }
+                        span {
+                            margin-left: 5px;
+                        }
+                    }
+
+                    .final {
+                        border: none;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.container {
+    width: 100vw;
+    min-height: calc(100vh - $heightHeader);
+    display: flex;
+    justify-content: center;
+
+    .bodyContainer {
+        width: $maxWidth;
+        height: 100%;
+    }
+}

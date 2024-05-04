@@ -1,0 +1,14 @@
+.boxChat{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    .boxChat-icon{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(5 157 247);
+    }
+}

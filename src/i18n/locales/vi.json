@@ -1,0 +1,26 @@
+{
+    "translation": {
+        "auth_Home": "Trang Chủ",
+        "auth_Login": "Đăng Nhập",
+        "auth_Signin": "Đăng Nhập",
+        "auth_Register": "Đăng Ký",
+        "auth_Signup": "Đăng Ký",
+        "auth_Login_Sucess": "Đăng Nhập Thành Công",
+        "auth_Register_Sucess": "Đăng Ký Thành Công",
+        "auth_Login_Fail": "Đăng Nhập Thất Bại",
+        "auth_Register_Fail": "Đăng Ký Thất Bại",
+        "auth_Validate_Required": "Không Được Để Trống",
+        "auth_Validate_Min3": "Phải Có Ít Nhất 3 Ký Tự",
+        "auth_User_Not_Found": "Người Dùng Không Tồn Tại",
+        "auth_Password_Wrong": "Mật Khẩu Không Đúng",
+        "auth_User_Name": "Tài Khoản",
+        "auth_Password": "Mật Khẩu",
+        "auth_Confirm_Password": "Xác Nhận Mật Khẩu",
+        "auth_Acc": "Không Có Tài Khoản ?",
+        "auth_Password_Confirm": "Mật Khẩu Xác Nhận Không Trùng Khớp",
+        "auth_Email_Invalid": "Địa Chỉ Email Không Hợp Lệ",
+        "auth_Acc_Already":"Bạn Đã Có Tài Khoản?",
+        "auth_Or_Join": "Hoặc Tham Gia Với",
+        "auth_Forgot_Password": "Quên Mật Khẩu?"
+    }
+}

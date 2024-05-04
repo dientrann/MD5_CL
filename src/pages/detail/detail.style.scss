@@ -1,0 +1,18 @@
+.headerDetail{
+    margin-top: 20px;
+}
+.detailContent {
+    margin-top: 20px;
+    display: flex;
+
+    .leftContent {
+        img {
+            width: 650px;
+            height: 700px;
+        }
+    }
+
+    .rightContent {
+        margin-left: 50px;
+    }
+}

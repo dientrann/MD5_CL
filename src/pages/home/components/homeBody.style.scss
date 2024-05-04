@@ -1,0 +1,105 @@
+.carousel{
+    z-index: 10;
+}
+.contentBody {
+    .listProduct {
+        display: flex;
+        margin-top: 20px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            height: 3px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 20px;
+        }
+
+        .itemProduct {
+            width: 300px;
+            height: 430px;
+            border-radius: 10px;
+            border: 1px solid gray;
+            position: relative;
+            margin: 10px;
+            z-index: 15;
+
+            .imgProduct{
+                width:100% ;
+                border-bottom: 1px solid gray;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    padding: 3px;
+                    width: 290px;
+                    height: 315px;
+                }
+
+            }
+
+            .descProduct {
+                height: 20px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                position: relative;
+
+                svg {
+                    cursor: pointer;
+                    z-index: 10;
+
+                    &:hover+.disc {
+                        display: block;
+                    }
+                }
+
+                .disc {
+                    position: absolute;
+                    top: -96px;
+                    left: 0;
+                    width: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    color: white;
+                    padding: 5px;
+                    height: 95px;
+                    display: none;
+                    animation: slideUp 0.5s ease-in-out;
+                    z-index: 5;
+                }
+            }
+
+            .infoProduct {
+                position: absolute;
+                width: 100%;
+                height: 45px;
+                bottom: 50px;
+                left: 0;
+                z-index: 10;
+                background-color: white;
+                padding: 5px;
+            }
+
+            .btnProduct {
+                width: 100%;
+                height: 50px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10;
+                // background-color: white;
+
+                button {
+                    margin: 10px;
+                    height: 30px;
+                    width: 100px;
+                    border-radius: 30px;
+                    border: 1px solid gray;
+                }
+            }
+        }
+    }
+}
