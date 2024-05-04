@@ -12,6 +12,7 @@ export default function Cart() {
         return productStore.data?.find((item) => item.id == id)
     }
     console.log(cartStore.data);
+    
 
     return (
         <div>
