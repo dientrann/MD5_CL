@@ -11,9 +11,11 @@ import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 export default function UserInfo() {
-    useEffect(()=>{
-        dispatchFetch.fetchCart()
-    },[])
+    useEffect(() => {
+        if(cartStore.data == null){
+            dispatchFetch.fetchCart()
+        }
+    }, [])
     const navigate = useNavigate();
     const userStore = useSelector((store: StoreType) => store.userStore);
     const [isMenu, setIsMenu] = useState(false);
@@ -26,18 +28,10 @@ export default function UserInfo() {
                 });
                 navigate('/cart');
             }} className="cart"><FaShoppingCart></FaShoppingCart><span>{cartStore.data?.length}</span></div>
-            <div onClick={() => {
+            <div className="userName" onClick={() => {
                 setIsMenu(!isMenu);
-            }}>{userStore.data?.userName.includes('.') ? userStore.data?.email.split('@')[0] : userStore.data?.userName}<FaUser></FaUser></div>
-            {
-                isMenu && <div onClick={(e) => {
-                    console.log(typeof userStore.data?.userName)
-
-                    console.log((e.target as any).closest('.menu'));
-                    if (!(e.target as any).closest('.menu')) {
-                        setIsMenu(false);
-                    }
-                }} className="menu">
+            }}>{userStore.data?.userName.includes('.') ? userStore.data?.email.split('@')[0] : userStore.data?.userName}<FaUser></FaUser>
+                <div className="menu">
                     <div className="itemMenu"><RiSettings2Fill></RiSettings2Fill> <span>Account Setting</span></div>
                     {userStore.data?.role == 'ADMIN' && <div className="itemMenu"><MdOutlineAdminPanelSettings></MdOutlineAdminPanelSettings><span onClick={() => {
                         navigate('/admin/user');
@@ -47,7 +41,8 @@ export default function UserInfo() {
                         window.location.reload();
                     }}><HiLogout></HiLogout> <span>LogOut</span></div>
                 </div>
-            }
+            </div>
+
         </div>
     );
 }

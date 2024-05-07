@@ -4,6 +4,8 @@ import { categoryAction, categoryReducer } from "./slices/category.slice";
 import { productAction, productReducer } from "./slices/product.slice";
 import { cartAction, cartReducer } from "./slices/cart.slice";
 import { chatReducer } from "./slices/chat.slice";
+import { billAction, billReducer } from "./slices/bill.slice";
+import { billUserAction, billUserReducer } from "./slices/billUser.slice";
 
 
 const RootReducer = combineReducers({
@@ -12,7 +14,9 @@ const RootReducer = combineReducers({
     listUserStore: listUserReducer,
     productStore: productReducer,
     cartStore: cartReducer,
-    chatStore: chatReducer
+    chatStore: chatReducer,
+    billStore: billReducer,
+    billUserStore: billUserReducer,
 })
 
 export type StoreType = ReturnType<typeof RootReducer>
@@ -31,5 +35,7 @@ export const dispatchFetch = {
     fetchCategory: () => store.dispatch(categoryAction.fetchCategory()),
     fetchListUser: () => store.dispatch(listUserAction.fetchListUser()),
     fetchProduct: () => store.dispatch(productAction.fetchProduct()),
-    fetchCart: () => store.dispatch(cartAction.fetchCart())
+    fetchCart: () => store.dispatch(cartAction.fetchCart()),
+    fetchBill: () => store.dispatch(billAction.fetchBill()),
+    fetchBillUser: () => store.dispatch(billUserAction.fetchBillUser()),
 }

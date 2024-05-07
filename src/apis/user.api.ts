@@ -40,5 +40,12 @@ export default {
                 Authorization: token ? `Bearer ${token}` : undefined
             }
         })
-    }
+    },
+    updateRole: async (
+        token: string,
+        data: {
+            userName: string
+        }) => {
+        return await axios.patch(`${import.meta.env.VITE_USER_API}update-role`, {token, data})
+    },
 }

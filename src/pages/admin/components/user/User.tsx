@@ -1,9 +1,9 @@
 import { StoreType, dispatchFetch } from "@/stores";
 import { useEffect } from "react";
-import { FaPlusCircle } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
 import { useSelector } from "react-redux";
+import '../category/Modals/modal.style.scss'
+import apis from "@/apis";
 
 export default function User() {
     useEffect(()=>{
@@ -11,14 +11,19 @@ export default function User() {
     }, [])
 
     const listUserStore = useSelector((store:StoreType )=> store.listUserStore)
+    const handleUpdate = async(userName: string)=>{
+        try{
+            let resUpdate = await apis.userApi.updateRole(localStorage.getItem('token') as string, {userName})
+            console.log("res", resUpdate);
+            
+        }catch(err){
 
+        }
+    }
   return (
     <div className="toolPage">
             <div className="headerTool">
-                <h3>{`Category`}</h3>
-                <button className="btnCreate" onClick={() => {
-                    
-                }}>Create <span><FaPlusCircle /></span></button>
+                <h3>User</h3>
             </div>
             <div className="bodyTool">
                 <table>
@@ -47,10 +52,8 @@ export default function User() {
                                     <td>{item.updatedAt}</td>
                                     <td className="tdTool">
                                         <button type="button" className="btnUpdate" onClick={()=>{
-                                        }}>Update <span><RxUpdate></RxUpdate></span></button>
-                                        <button type="button" className="btnDelete" onClick={() => {
-                                            
-                                        }}>Delete <span><MdDeleteForever></MdDeleteForever></span></button>
+                                            handleUpdate(item.userName)
+                                        }}>{item.role == "ADMIN" ? "Member": "Admin"}<span><RxUpdate></RxUpdate></span></button>
                                     </td>
                                 </tr>
                             )

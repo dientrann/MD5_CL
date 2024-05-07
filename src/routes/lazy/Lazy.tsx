@@ -14,9 +14,10 @@ export const lazyFn = (importFunc: any, access: boolean = true, url: string = ''
   
   const LazyComponent = lazy(() => {
       return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(importFunc());
-        }, 1000);
+        // setTimeout(() => {
+        //   resolve(importFunc());
+        // }, 200);
+        resolve(importFunc());
       });
     });
   //const LazyComponent = lazy(importFunc);

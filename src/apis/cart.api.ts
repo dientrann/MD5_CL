@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default {
-    getAll: async (id: number) => {
+    getByUser: async (id: number) => {
         return await axios.get(`${import.meta.env.VITE_CART_API}${id}`)
     },
     create: async (data: {
@@ -10,5 +10,9 @@ export default {
         quantity: number,
     }) =>{
         return await axios.post(`${import.meta.env.VITE_CART_API}`, data)
+    },
+    delete: async (id: number) =>{
+        return await axios.delete(`${import.meta.env.VITE_CART_API}${id}`)
     }
+
 }

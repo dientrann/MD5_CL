@@ -1,11 +1,22 @@
 .carousel{
     z-index: 10;
+    margin-top: 20px;
+    animation: slideTop 1s ease;
 }
 .contentBody {
+    .category{
+        font-size: 20px;
+        margin-top: 20px;
+        font-weight: 700;
+        opacity: 0;
+        //animation: slideLeft 1s ease;
+    }
     .listProduct {
         display: flex;
         margin-top: 20px;
         overflow: auto;
+        ///animation: slideRight 1s ease;
+        opacity: 0;
 
         &::-webkit-scrollbar {
             height: 3px;
@@ -100,6 +111,24 @@
                     border: 1px solid gray;
                 }
             }
+        }
+    }
+    .active{
+        .category{
+            opacity: 1;
+            animation: slideLeft 1s ease;
+        }
+        .listProduct{
+            opacity: 1;
+            animation: slideRight 1s ease;
+        }
+    }
+    .out{
+        .category{
+            animation: slideOutLeft 1s ease;
+        }
+        .listProduct{
+            animation: slideOutRight 1s ease;
         }
     }
 }

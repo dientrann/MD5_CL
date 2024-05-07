@@ -1,12 +1,13 @@
 import pictures from "@/pictures";
 import { StoreType } from "@/stores";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import UserInfo from "./components/UserInfo";
 import { FaSearch, FaAngleRight } from "react-icons/fa";
+import { Product } from "@/stores/slices/product.slice";
 
 
 export default function Header() {
@@ -19,6 +20,7 @@ export default function Header() {
   const { t } = useTranslation()
   const userStore = useSelector((store: StoreType) => store.userStore)
   const categoryStore = useSelector((store: StoreType) => store.categoryStore)
+  const productStore = useSelector((store: StoreType) => store.productStore)
 
   useEffect(() => {
     if (userStore.data) {
@@ -27,9 +29,9 @@ export default function Header() {
   }, [userStore.data, userStore.loading])
   useEffect(() => {
     const currentURL = window.location.href;
-      const page = currentURL.split('/')[3]
+    const page = currentURL.split('/')[3]
     if (category) {
-      
+
       document.querySelectorAll('.itemMenu').forEach((el) => {
         el.classList.remove('select');
       });
@@ -40,13 +42,26 @@ export default function Header() {
       });
       document.querySelector(`.home`)?.classList.add("select");
     }
-    if(page == "cart"){
+    if (page == "cart") {
       document.querySelectorAll('.itemMenu').forEach((el) => {
         el.classList.remove('select');
       });
     }
   }, [category])
 
+  const [listSearch, setListSearch] = useState<Product[] | undefined>([])
+
+  const handleSearch = (dataSearch: string) => {
+    try {
+      const keyword = dataSearch.toLowerCase();
+      const foundProducts = productStore.data?.filter((product) => {
+        return product.name.toLowerCase().includes(keyword) || product.describe.toLowerCase().includes(keyword);
+      });
+      setListSearch(foundProducts?.slice(0, 5));
+    } catch (err) {
+      console.log(err)
+    }
+  }
   return (
     <>
       <div className="logoHeader">
@@ -79,10 +94,31 @@ export default function Header() {
         </div>
       </div>
       <div className="search">
-        <form action="">
-          <input type="text" name="search" placeholder="Search" />
-          <button><FaSearch></FaSearch></button>
-        </form>
+          <input type="text" name="search" className="searchInput" placeholder="Search" onChange={(e) => {
+            const dataSearch = e.target.value;
+            handleSearch(dataSearch)
+          }} />
+          <div className="listSearch">
+            {
+              listSearch?.map((item, index) => {
+                return (
+                  <div className="itemSearch" key={index}>
+                    <div className="img">
+                      <img src={`${import.meta.env.VITE_SERVER}${item.image}`} alt="" />
+                    </div>
+                    <div className="content">
+                      <h3>{item.name}</h3>
+                      <h4>{item.price}</h4>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+          <button onClick={()=>{
+            const elSearch = document.querySelector('.searchInput') as HTMLInputElement;
+            handleSearch(elSearch.value)
+          }}><FaSearch></FaSearch></button>
 
       </div>
       <div className="infoUser">

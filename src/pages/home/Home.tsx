@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect} from "react";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 
@@ -15,12 +15,31 @@ const userStore = useSelector((store: StoreType) => store.userStore);
   useEffect(() => {
     if (!userStore.data) {
       if (localStorage.getItem('token')) {
-        console.log("vào dispatch", userStore);
         dispatchFetch.fetchUser()
-        console.log("vào dispatch", userStore);
       }
     }
   }, [])
+
+  // const [elFooter, setFooter] = useState<any>()
+  // const isIntrView = (el: any) => {
+  //   const rect = el.getBoundingClientRect();
+  //   return rect.bottom <= window.innerHeight
+  // }
+
+
+  // useEffect(() => {
+  //   const elFotter = document.querySelector('footer') as HTMLElement;
+  //   console.log(elFooter);
+  //   setFooter(elFotter)
+  // }, [])
+
+  // window.addEventListener('scroll', () => {
+  //   if (isIntrView(elFooter)) {
+  //     elFooter?.classList.add('hide')
+  //   } else {
+  //     elFooter?.classList.remove('hide')
+  //   }
+  // })
   return (
     <>
       <header>

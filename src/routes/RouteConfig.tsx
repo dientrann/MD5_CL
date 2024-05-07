@@ -22,6 +22,7 @@ export default function RouteConfig() {
                         <Route path="/admin/category" element={lazyFn(() => import('@pages/admin/components/category/Category'))}/>
                         <Route path="/admin/product" element={lazyFn(() => import('@pages/admin/components/product/Product'))}/>
                         <Route path="/admin/user" element={lazyFn(() => import('@pages/admin/components/user/User'))}/>
+                        <Route path="/admin/bill" element={lazyFn(() => import('@pages/admin/components/bill/Bill'))}/>
                     </Route>
                 </Routes>
 

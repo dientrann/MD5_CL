@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import { RiMenuUnfoldLine, RiMenuFoldLine } from "react-icons/ri";
 import { MdOutlineCategory, MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 
 
 import './admin.style.scss'
@@ -27,6 +28,11 @@ export default function Admin() {
       name: "Product",
       icon: <MdOutlineProductionQuantityLimits />,
       path: "product",
+    },
+    {
+      name:"Bill",
+      icon: <FaRegMoneyBillAlt/>,
+      path: "bill"
     }
   ]
   useEffect(()=>{

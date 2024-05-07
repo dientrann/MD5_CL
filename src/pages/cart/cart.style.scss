@@ -1,0 +1,232 @@
+.bodyCart {
+    margin-top: 20px;
+
+    input {
+        margin: 10px 20px;
+    }
+
+    button {
+        margin-top: 10px;
+        height: 30px;
+        padding: 10px;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid gray;
+    }
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 3px 3px rgb(0, 0, 0, 0.3);
+    border-radius: 5px;
+    margin-top: 10px;
+
+    .checkBox {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .rightContent {
+        width: 70%;
+        padding: 0 10px;
+
+        .nameCart {
+            padding: 10px;
+        }
+
+        .contentCart {
+            width: 100%;
+            display: flex;
+
+            .imgCart {
+                img {
+                    height: 120px;
+                    width: 110px;
+                }
+            }
+
+            .content {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .descriptionCart {}
+
+                .priceCart {}
+
+                .total {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .quantityCart {
+                        span {
+                            margin: 0 5px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .totalCart {
+                        width: 100px;
+                        color: red;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .tool {
+        width: 27%;
+        display: flex;
+        justify-content: flex-end;
+
+        .btnDelete {
+            height: 30px;
+            position: relative;
+            margin: 30px;
+            padding: 0 10px;
+            background-color: rgb(255 0 0);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            span {
+                display: none;
+            }
+
+            &:hover {
+                span {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 20px;
+                    border-radius: 30px;
+                    background-color: rgb(255 0 0);
+                    animation: fadeIn 0.5s ease-in-out;
+                }
+            }
+        }
+    }
+}
+
+.btn {
+    .buyBtn {
+        height: 30px;
+        position: relative;
+        padding: 0 10px;
+        background-color: rgb(0 200 148);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        span {
+            display: none;
+        }
+
+        &:hover {
+            span {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+                border-radius: 30px;
+                background-color: rgb(0 200 148);
+                animation: fadeIn 0.5s ease-in-out;
+            }
+        }
+    }
+}
+
+.Bill {
+    margin-top: 20px;
+
+    .itemBill {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 0 3px 3px rgb(0, 0, 0, 0.3);
+        margin: 10px 0;
+        border-radius: 5px;
+        height: 100px;
+
+        .stt {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+        }
+
+        .status {
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .btn {
+                position: relative;
+                height: 30px;
+                padding: 0 10px;
+                border-radius: 30px;
+                border: 1px solid rgb(101 120 153);
+                margin: 5px;
+                color: rgb(241 236 255);
+                cursor: pointer;
+                animation: fadeIn 0.5s ease-in-out;
+
+                span {
+                    display: none;
+                }
+
+                &:hover {
+                    span {
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 20px;
+                        border-radius: 30px;
+                        animation: fadeIn 0.5s ease-in-out;
+                    }
+                }
+            }
+            .btnCancel{
+                background-color: rgb(255 0 0);
+                &:hover{
+                    span{
+                        background-color: rgb(255 0 0)
+                    }
+                }
+            }
+        }
+    }
+}

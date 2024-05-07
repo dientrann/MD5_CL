@@ -18,7 +18,11 @@ export default function Product() {
     useEffect(() => {
         dispatchFetch.fetchProduct()
     },[])
-
+    console.log(categoryStore);
+    
+    const findCategory = (id: number) =>{
+        return categoryStore.data?.find(item => item.id === id)?.title
+    }
   return (
     <div className="toolPage">
             <div className="headerTool">
@@ -46,7 +50,7 @@ export default function Product() {
                                     <td className="sttTool">{index + 1}</td>
                                     <td>{item.name}</td>
                                     <td className="imgProduct"><img src={`${import.meta.env.VITE_SERVER}${item.image}`} alt="" /></td>
-                                    <td>{categoryStore.data?.find(itemCtegory => itemCtegory.id == item.id)?.title}</td>
+                                    <td>{findCategory(item.categoryId)}</td>
                                     <td>{item.describe}</td>
                                     <td>{item.createdAt}</td>
                                     <td>{item.updatedAt}</td>

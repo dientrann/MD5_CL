@@ -1,41 +1,39 @@
 import apis from "@/apis";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
-
-export interface Cart {
-    id: number,
-    productId: number,
-    userId: number,
-    quantity: number,
-    createdAt: string,
-    updatedAt: string
+enum StatusBill {
+    PENDING = "PENDING",
+    SHIPPING = "SHIPPING",
+    COMPLETE = "COMPLETE",
 }
 
-interface CartState {
-    data: Cart[] | null;
+export interface Bill {
+    id: number,
+    userId: number,
+    status: StatusBill,
+    content: string,
+    total: number,
+    createAt: string,
+    updateAt: string,
+}
+
+interface BillState {
+    data: Bill[] | null;
     loading: boolean;
 }
 
-let initialState: CartState = {
+let initialState: BillState = {
     data: null,
     loading: false,
 }
 
-export const fetchCart = createAsyncThunk(
-    'cart/fetchCart',
+export const fetchBill = createAsyncThunk(
+    'bill/fetchBill',
     async () => {
-        try {
-            let resUser = await apis.userApi.getData(localStorage.getItem('token'))
-            console.log("resUser", resUser);
+        try {            
+            let res = await apis.billApi.getAll(localStorage.getItem('token'))
+            console.log("res", res.data.data);
 
-            if(!resUser.data.data){
-                throw {
-                    message: "User not found"
-                }
-            }
-
-            let res = await apis.cartApi.getByUser(resUser.data.data.id)
             
             return res.data.data
         } catch (err) {
@@ -44,8 +42,8 @@ export const fetchCart = createAsyncThunk(
     }
 )
 
-const cartSlice = createSlice({
-    name: "cart",
+const billSlice = createSlice({
+    name: "bill",
     initialState,
     reducers: {
         setData: (state, action) => {
@@ -55,35 +53,35 @@ const cartSlice = createSlice({
             state.data?.push(action.payload)
         },
         delete: (state, action) =>{
-            console.log(action.payload);
-            
             if(state.data){
             state.data = state.data?.filter((item) => item.id != action.payload)
             }
         },
-        update: (state, action) =>{           
+        update: (state, action) =>{
+            console.log("action ", action.payload);
+            
             if(state.data){
                 state.data = state.data?.map((item) => item.id == action.payload.id ? action.payload : item)
             }
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchCart.pending, (state) => {
+        builder.addCase(fetchBill.pending, (state) => {
 
             state.loading = true;
         })
-        builder.addCase(fetchCart.fulfilled, (state, action) => {
+        builder.addCase(fetchBill.fulfilled, (state, action) => {
             state.data = action.payload;
             state.loading = false;
         })
-        builder.addCase(fetchCart.rejected, (state) => {
+        builder.addCase(fetchBill.rejected, (state) => {
             state.loading = false;
         })
     }
 })
 
-export const cartReducer = cartSlice.reducer;
-export const cartAction = {
-    ...cartSlice.actions,
-    fetchCart
+export const billReducer = billSlice.reducer;
+export const billAction = {
+    ...billSlice.actions,
+    fetchBill
 }
