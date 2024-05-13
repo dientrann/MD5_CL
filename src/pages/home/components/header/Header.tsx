@@ -1,6 +1,6 @@
 import pictures from "@/pictures";
 import { StoreType } from "@/stores";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import UserInfo from "./components/UserInfo";
 import { FaSearch, FaAngleRight } from "react-icons/fa";
 import { Product } from "@/stores/slices/product.slice";
+import apis from "@/apis";
 
 
 export default function Header() {
@@ -51,13 +52,10 @@ export default function Header() {
 
   const [listSearch, setListSearch] = useState<Product[] | undefined>([])
 
-  const handleSearch = (dataSearch: string) => {
+  const handleSearch = async (dataSearch: string) => {
     try {
-      const keyword = dataSearch.toLowerCase();
-      const foundProducts = productStore.data?.filter((product) => {
-        return product.name.toLowerCase().includes(keyword) || product.describe.toLowerCase().includes(keyword);
-      });
-      setListSearch(foundProducts?.slice(0, 5));
+      let resSearch = await apis.productApi.search(dataSearch)
+      setListSearch(resSearch.data.data.slice(0, 5));
     } catch (err) {
       console.log(err)
     }
@@ -65,7 +63,9 @@ export default function Header() {
   return (
     <>
       <div className="logoHeader">
-        <img src={pictures.logo} alt="Logo" />
+        <img onClick={() => {
+          navigate('/')
+        }} src={pictures.logo} alt="Logo" />
         <div className="slogan">
           <h1>Name</h1>
           <h3>Slogan</h3>
@@ -94,31 +94,31 @@ export default function Header() {
         </div>
       </div>
       <div className="search">
-          <input type="text" name="search" className="searchInput" placeholder="Search" onChange={(e) => {
-            const dataSearch = e.target.value;
-            handleSearch(dataSearch)
-          }} />
-          <div className="listSearch">
-            {
-              listSearch?.map((item, index) => {
-                return (
-                  <div className="itemSearch" key={index}>
-                    <div className="img">
-                      <img src={`${import.meta.env.VITE_SERVER}${item.image}`} alt="" />
-                    </div>
-                    <div className="content">
-                      <h3>{item.name}</h3>
-                      <h4>{item.price}</h4>
-                    </div>
+        <input type="text" name="search" className="searchInput" placeholder="Search" onChange={(e) => {
+          const dataSearch = e.target.value;
+          handleSearch(dataSearch)
+        }} />
+        <div className="listSearch">
+          {
+            listSearch?.map((item, index) => {
+              return (
+                <div className="itemSearch" key={index}>
+                  <div className="img">
+                    <img src={`${import.meta.env.VITE_SERVER}${item.image}`} alt="" />
                   </div>
-                )
-              })
-            }
-          </div>
-          <button onClick={()=>{
-            const elSearch = document.querySelector('.searchInput') as HTMLInputElement;
-            handleSearch(elSearch.value)
-          }}><FaSearch></FaSearch></button>
+                  <div className="content">
+                    <h3>{item.name}</h3>
+                    <h4>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.price)}</h4>
+                  </div>
+                </div>
+              )
+            })
+          }
+        </div>
+        <button onClick={() => {
+          const elSearch = document.querySelector('.searchInput') as HTMLInputElement;
+          handleSearch(elSearch.value)
+        }}><FaSearch></FaSearch></button>
 
       </div>
       <div className="infoUser">

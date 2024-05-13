@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { RiArrowUpDoubleFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { FaCartPlus } from "react-icons/fa";
+import { BiDetail } from "react-icons/bi";
 
 import './category.style.scss'
 
@@ -18,37 +20,48 @@ export default function Category() {
       dispatchFetch.fetchUser()
     }
     if (productStore.data == null) {
-      dispatchFetch.fetchProduct()
+      dispatchFetch.fetchProductCategory({ category: idCategory as number, page: 1 })
+    }
+    if (cartStore.data == null) {
+      dispatchFetch.fetchCart()
     }
   }, [])
   const { category } = useParams()
   const productStore = useSelector((store: StoreType) => store.productStore)
   const categoryStore = useSelector((store: StoreType) => store.categoryStore)
   const userStore = useSelector((store: StoreType) => store.userStore)
-  const idCategory = categoryStore.data?.find((item) => item.link == category)?.id
+  const cartStore = useSelector((store: StoreType) => store.cartStore)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-
-  const productsCategory = productStore.data?.filter((item) => item.categoryId == idCategory)
-
-  const [products, setProducts] = useState(productStore.data?.filter((item) => item.categoryId == idCategory))
-
-
+  const [idCategory, setIdCategory] = useState(categoryStore.data?.find((item) => item.link == category)?.id)
   const [current, setCurrent] = useState(1);
   const onChange: PaginationProps['onChange'] = (page) => {
     setCurrent(page)
   };
-
-  const [total, setTotal] = useState(productsCategory?.length);
   useEffect(() => {
-    setProducts(productStore.data?.filter((item) => item.categoryId == idCategory))
-    console.log("total", products?.length);
-    setTotal(products?.length)
-  },[])
+    setIdCategory(categoryStore.data?.find((item) => item.link == category)?.id)
+    setCurrent(1)
+    //dispatchFetch.fetchProductCategory({ category: idCategory as number, page: current })
+  }, [category])
 
+  useEffect(() => {
+    dispatchFetch.fetchProductCategory({ category: idCategory as number, page: current })
+    document.querySelectorAll('.itemProduct').forEach(item => {
+      item.classList.add('active');
+    });
+  }, [current])
 
+  useEffect(() => {
+    dispatchFetch.fetchProductCategory({ category: idCategory as number, page: 1 })
+  }, [idCategory])
 
+  useEffect(() => {
+    document.querySelectorAll('.itemProduct').forEach(item => {
+      item.classList.add('active');
+    });
+  }, [productStore.productCategory])
+
+  
   const handleCreateCart = async (dataCreate: {
     productId: number,
     quantity: number,
@@ -61,20 +74,24 @@ export default function Category() {
           message: "Lỗi khi thêm vào giỏ hàng"
         }
       }
-      dispatch(cartAction.create(resCreateCart.data.data))
-      message.success("Thêm vào giỏ hàng thành công")
+      if (cartStore.data?.find(item => item.productId == resCreateCart.data.data.productId)) {
+        dispatch(cartAction.update(resCreateCart.data.data))
+      } else {
+        dispatch(cartAction.create(resCreateCart.data.data))
+      }
+      message.success("Create Cart Success")
 
     } catch (err) {
-      message.error("Lỗi khi thêm vào giỏ hàng")
+      message.error("Create Cart Error")
     }
   }
   return (
     <>
       <div className="contentBodyCategory">
         {
-          productsCategory?.splice(((current - 1) * 4), (current * 4)).map((itemProduct, index) => {
+          productStore.productCategory?.map((itemProduct, index) => {
             return (
-              <div key={index} className={`itemProduct`}>
+              <div key={index} className={`itemProduct ${category}`}>
                 <div className="imgProduct">
                   <img src={`http://localhost:3000/${itemProduct.image}`} alt="" />
                 </div>
@@ -86,30 +103,30 @@ export default function Category() {
                 </div>
                 <div className="infoProduct">
                   <h3>{itemProduct.name}</h3>
-                  <h5>{itemProduct.price}</h5>
+                  <h5>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(itemProduct.price)}</h5>
                 </div>
                 <div className="btnProduct">
-                  <button onClick={() => {
+                  <button className='btn btnDetail' onClick={() => {
                     navigate(`/detail/${itemProduct.id}`)
                     document.querySelectorAll('.itemMenu').forEach((el) => {
                       el.classList.remove('select');
                     });
-                  }}>Chi Tiết</button>
-                  <button onClick={() => {
+                  }}>Detail <span><BiDetail /></span></button>
+                  <button className='btn btnBuy' onClick={() => {
                     handleCreateCart({
                       userId: userStore.data?.id as number,
                       productId: itemProduct.id,
                       quantity: 1
                     })
 
-                  }}>Mua Ngay</button>
+                  }}>Buy <span><FaCartPlus /></span></button>
                 </div>
               </div>
             )
           })
         }
       </div>
-      <div><Pagination defaultCurrent={1} total={total} pageSize={4} onChange={onChange} /></div>
+      <div className='pagination'><Pagination defaultCurrent={current} total={productStore.total as number} pageSize={8} onChange={onChange} /></div>
     </>
   )
 }

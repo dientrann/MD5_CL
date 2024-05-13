@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { RiMenuUnfoldLine, RiMenuFoldLine } from "react-icons/ri";
 import { MdOutlineCategory, MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { TbCarouselHorizontalFilled } from "react-icons/tb";
 
 
 import './admin.style.scss'
@@ -33,6 +34,11 @@ export default function Admin() {
       name:"Bill",
       icon: <FaRegMoneyBillAlt/>,
       path: "bill"
+    },
+    {
+      name: "Carousel",
+      icon: <TbCarouselHorizontalFilled />,
+      path: "carousel",
     }
   ]
   useEffect(()=>{

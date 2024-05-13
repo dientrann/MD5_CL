@@ -62,7 +62,7 @@ export default function Bill() {
                                         <td>{listUserStore.data?.find(itemUser => itemUser.id == item.userId)?.userName}</td>
                                         <td>{JSON.parse(item.content).map((itemContent: any, index2: any) => {
                                             return (
-                                                <div key={index2}>{productStore.data?.find(itemProduct => itemProduct.id == itemContent.productId)?.name}</div>
+                                                <div key={index2}>{itemContent.name}</div>
                                             )
                                         })}</td>
                                         <td>{item.total}</td>

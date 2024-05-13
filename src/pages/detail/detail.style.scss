@@ -1,18 +1,82 @@
-.headerDetail{
+.headerDetail {
     margin-top: 20px;
 }
+
 .detailContent {
     margin-top: 20px;
     display: flex;
 
     .leftContent {
         img {
-            width: 650px;
-            height: 700px;
+            width: 400px;
+            height: 450px;
+            border-radius: 10px;
+            box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
         }
     }
 
     .rightContent {
         margin-left: 50px;
+        width: 30%;
+
+        h1 {}
+
+        h4 {
+            color: red;
+        }
+
+        p {}
+
+        .btnProduct {
+            width: 100%;
+            height: 50px;
+            //position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+
+            button {
+                margin: 10px;
+                height: 30px;
+                width: 100px;
+                border-radius: 30px;
+                border: 1px solid gray;
+                position: relative;
+
+                &:hover {
+                    span {
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 20px;
+                        border-radius: 30px;
+                        animation: fadeIn 0.5s ease-in-out;
+                    }
+                }
+
+                span {
+                    display: none;
+                }
+
+            }
+            .btnBuy {
+                background-color: rgb(244 237 85);
+
+                &:hover {
+                    span {
+                        background-color: rgb(244 237 85);
+                    }
+                }
+            }
+        }
+
     }
 }

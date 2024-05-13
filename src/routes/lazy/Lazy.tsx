@@ -16,7 +16,7 @@ export const lazyFn = (importFunc: any, access: boolean = true, url: string = ''
       return new Promise((resolve) => {
         // setTimeout(() => {
         //   resolve(importFunc());
-        // }, 200);
+        // }, 500);
         resolve(importFunc());
       });
     });

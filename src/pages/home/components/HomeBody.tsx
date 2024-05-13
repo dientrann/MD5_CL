@@ -7,33 +7,10 @@ import './homeBody.style.scss'
 import { useNavigate } from "react-router-dom";
 import apis from "@/apis";
 import { cartAction } from "@/stores/slices/cart.slice";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect } from "react";
+import { FaCartPlus } from "react-icons/fa";
+import { BiDetail } from "react-icons/bi";
 
-
-const contentStyle1: React.CSSProperties = {
-  height: '400px',
-  color: '#fff',
-  lineHeight: '300px',
-  textAlign: 'center',
-  background: '#364d79',
-  backgroundImage: 'url(https://shopdunk.com/images/uploaded/banner/banner%202024/Thang_5/15%20PRM%20PC.png)',
-};
-const contentStyle2: React.CSSProperties = {
-  height: '400px',
-  color: '#fff',
-  lineHeight: '300px',
-  textAlign: 'center',
-  background: '#364d79',
-  backgroundImage: 'url(https://shopdunk.com/images/uploaded/banner/banner%202024/Thang_5/15%20PRM%20PC.png)',
-};
-const contentStyle3: React.CSSProperties = {
-  height: '400px',
-  color: '#fff',
-  lineHeight: '300px',
-  textAlign: 'center',
-  background: '#364d79',
-  backgroundImage: 'url(https://shopdunk.com/images/uploaded/banner/banner%202024/Thang_5/15%20PRM%20PC.png)',
-};
 
 
 
@@ -45,9 +22,15 @@ export default function HomeBody() {
   const dispatch = useDispatch()
   const categoryStore = useSelector((store: StoreType) => store.categoryStore)
   const cartStore = useSelector((store: StoreType) => store.cartStore)
+  const carouselStore = useSelector((store: StoreType) => store.carouselStore)
+
+  console.log(productStore.productHome);
+
+
   let reversedData: any[] = [];
-  if (productStore.data) {
-    reversedData = [...productStore.data].reverse();
+
+  if (productStore.productHome) {
+    reversedData = [...productStore.productHome].reverse();
   }
 
   const handleCreateCart = async (dataCreate: {
@@ -56,6 +39,10 @@ export default function HomeBody() {
     userId: number,
   }) => {
     try {
+      if (!userStore.data) {
+        message.error("Please login to create cart")
+        return
+      }
       let resCreateCart = await apis.cartApi.create(dataCreate);
 
       if (resCreateCart.status != 200) {
@@ -63,7 +50,6 @@ export default function HomeBody() {
           message: "Create Cart Error"
         }
       }
-      console.log(resCreateCart);
 
       if (cartStore.data?.find(item => item.productId == resCreateCart.data.data.productId)) {
         dispatch(cartAction.update(resCreateCart.data.data))
@@ -87,7 +73,7 @@ export default function HomeBody() {
   useEffect(() => {
     categoryStore.data?.map((item) => {
       const el = document.querySelector(`.${item.title}`) as HTMLElement;
-      if (isIntrView(el)) {
+      if (el && isIntrView(el)) {
         el.classList.add('active')
       } else {
         el.classList.remove('active')
@@ -101,27 +87,36 @@ export default function HomeBody() {
         el.classList.add('active')
         el.classList.remove('out')
       } else {
-        
+
         el.classList.remove('active')
         el.classList.add("out")
       }
     })
   })
 
+  let listCarousel: CSSProperties[] | undefined = carouselStore.data?.map((item) => {
+    return {
+      height: '500px',
+      color: '#fff',
+      lineHeight: '500px',
+      textAlign: 'center',
+      background: '#364d79',
+      backgroundSize: 'cover',
+      backgroundImage: `url(${import.meta.env.VITE_SERVER}${item.image})`,
+    }
+  })
+
   return (
     <>
-      <div className="carousel">
+      <div className="carouselHome">
         <Carousel autoplay>
-          <div>
-            <h3 style={contentStyle1}></h3>
-          </div>
-          <div>
-            <h3 style={contentStyle2}></h3>
-          </div>
-          <div>
-            <h3 style={contentStyle3}></h3>
-          </div>
-
+          {listCarousel?.map((item, index) => {
+            return (
+              <div key={index}>
+                <h3 style={item}></h3>
+              </div>
+            )
+          })}
         </Carousel>
       </div>
       <div className="contentBody">
@@ -133,7 +128,7 @@ export default function HomeBody() {
                 <div className={`category`}>{item.title}</div>
                 <div className={`listProduct`} >
                   {
-                    reversedData?.map((itemProduct) => {
+                    productStore.productHome?.map((itemProduct) => {
                       if (count < 5 && itemProduct.categoryId == item.id) {
                         count++;
                         return (
@@ -149,23 +144,23 @@ export default function HomeBody() {
                             </div>
                             <div className="infoProduct">
                               <h3>{itemProduct.name}</h3>
-                              <h5>{itemProduct.price}</h5>
+                              <h5>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(itemProduct.price)}</h5>
                             </div>
                             <div className="btnProduct">
-                              <button onClick={() => {
+                              <button className="btn btnDetail" onClick={() => {
                                 navigate(`/detail/${itemProduct.id}`)
                                 document.querySelectorAll('.itemMenu').forEach((el) => {
                                   el.classList.remove('select');
                                 });
-                              }}>Chi Tiết</button>
-                              <button onClick={() => {
+                              }}>Detail <span><BiDetail></BiDetail></span></button>
+                              <button className="btn btnBuy" onClick={() => {
                                 handleCreateCart({
                                   userId: userStore.data?.id as number,
                                   productId: itemProduct.id,
                                   quantity: 1
                                 })
 
-                              }}>Mua Ngay</button>
+                              }}>Buy <span><FaCartPlus></FaCartPlus></span></button>
                             </div>
                           </div>
                         )

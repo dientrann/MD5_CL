@@ -1,4 +1,4 @@
-.containerModal {
+.containerModal{
     position: fixed;
     top: 0;
     left: 0;
@@ -8,19 +8,16 @@
     display: flex;
     justify-content: center;
     z-index: 20;
-
-    .contentModal {
-        .bodyModal {
-            position: relative;
-            margin: 150px;
+    .contentModal{
+        .bodyModal{
+            margin: 170px;
             width: 400px;
             height: auto;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.5);
             animation: fadeIn 1s ease-in-out;
-
-            .headerModal {
+            .headerModal{
                 position: relative;
                 width: 100%;
                 height: 40px;
@@ -28,76 +25,48 @@
                 align-items: center;
                 padding: 10px;
                 border-bottom: 1px solid rgb(82 79 106);
-
-                span {
+                span{
                     position: absolute;
                     top: 10px;
                     right: 10px;
                     cursor: pointer;
-
-                    &:hover {
+                    &:hover{
                         color: rgb(82 79 106);
                         transform: scale(1.2);
                     }
                 }
             }
-
-            .formModal {
+            .formModal{
                 padding: 10px;
                 width: 100%;
-
-                .formBody {
+                .formBody{
                     width: 100%;
-
-                    .nameProduct {}
-
-                    .productInfo {
-                        display: flex;
-                        .imgProduct {
-                            img {
-                                height: 100px;
-                                width: 100px;
-                            }
-                        }
-
-                        .infoProduct {}
-                    }
                 }
-
-                .formInput {
+                .formInput{
                     margin-top: 10px;
                     width: 100%;
-
-                    label {
+                    label{
                         display: block;
                     }
-
-                    input {
+                    input{
                         height: 30px;
                         width: 100%;
                         border: 1px solid rgb(82 79 106);
                         border-radius: 5px;
                         padding: 5px;
                     }
-
-                    #fileImg {
-                        color: blue;
-                    }
-
-                    .errMessage {
+                    .errMessage{
                         font-size: 13px;
                         color: red;
                     }
                 }
-
-                .formBtn {
+                .formBtn{
                     margin-top: 10px;
                     height: 40px;
                     display: flex;
                     justify-content: flex-end;
                     align-items: center;
-
-                    button {
+                    button{
                         height: 30px;
                         padding: 10px;
                         border-radius: 10px;
@@ -108,64 +77,29 @@
                         margin: 0 5px;
                         cursor: pointer;
                     }
-
-                    .createBtn {
+                    .createBtn{
                         background-color: rgb(0 200 148);
                     }
-
-                    .cancelBtn {
+                    .cancelBtn{
                         background-color: rgb(227 234 226);
                     }
-
-                    .deleteBtn {
+                    .deleteBtn{
                         background-color: rgb(255 0 0);
                     }
-
-                    .updateBtn {
+                    .updateBtn{
                         background-color: rgb(2 142 187);
                     }
 
                 }
-
-                .error {
-                    input {
+                .error{
+                    input{
                         border: 1px solid red;
                     }
                 }
             }
         }
-
-        .close {
+        .close{
             animation: fadeOut 1s ease-in-out;
         }
     }
-
-    .step2 {
-
-        .bodyModal {
-            width: 700px !important;
-            height: 840px;
-
-            .formStep2 {
-                height: 100%;
-
-                .quill {
-                    margin-top: 10px;
-                }
-
-                .formBtn {
-                    position: absolute;
-                    bottom: 5px;
-                    right: 5px;
-                }
-            }
-        }
-        .carousel{
-            height: 525px !important;
-        }
-    }
-    .carouselDelete{
-        width: 600px !important;
-    }
-    
 }

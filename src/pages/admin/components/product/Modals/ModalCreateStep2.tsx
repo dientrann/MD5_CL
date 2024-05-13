@@ -52,15 +52,14 @@ export default function ModalCreateStep2({ handleIsModalCreate, dataCreate }: Mo
                     if (blob) {
                         const file = new File([blob], "cropped_image.jpg", { type: "image/jpeg" });
                         // Sử dụng đối tượng file ở đây hoặc truyền cho hàm xử lý khác
-                        console.log("Cropped image file:", file);
                         if (!dataCreate) {
                             throw {
                                 message: "Vui Lòng Hoàn Thành Bước 1"
                             }
                         }
 
-                        
-                        let resCreate = await apis.productApi.create(file, {...dataCreate, content: content})
+
+                        let resCreate = await apis.productApi.create(file, { ...dataCreate, content: content })
                         if (resCreate.status != 200) {
                             throw {
                                 message: "Create Product Error"
@@ -79,13 +78,14 @@ export default function ModalCreateStep2({ handleIsModalCreate, dataCreate }: Mo
         }
     };
     return (
-        <div className='step2'>
+        <div className='formStep2'>
             <div style={{ width: "100%" }}>
                 <input type="file" onChange={cropImage} />
                 <br />
                 <Cropper
-                    style={{ height: '300px', width: '400px' }}
-                    initialAspectRatio={1}
+                    style={{ height: '300px', width: '100%px' }}
+                    initialAspectRatio={290 /315}
+                    aspectRatio={290/315}
                     preview=".img-preview"
                     src={image}
                     ref={cropperRef}
@@ -100,7 +100,7 @@ export default function ModalCreateStep2({ handleIsModalCreate, dataCreate }: Mo
             </div>
             <div className='quill'>
                 <ReactQuill
-                    style={{ width: '500px', height: '300px' }}
+                    style={{ width: '100%px', height: '300px' }}
                     value={content}
                     onChange={handleChange}
                     modules={{

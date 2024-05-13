@@ -80,7 +80,7 @@ export default function ModalCreateStep1({ handleIsModalCreate = () => { } }) {
                                     }}
                                     onSubmit={(values, { setSubmitting }) => {
                                         setSubmitting(true);
-                                        document.querySelector('.bodyModal')?.classList.add('step2')
+                                        document.querySelector('.contentModal')?.classList.add('step2')
                                         setIsStep2(!isStep2)
                                         setDataCreate(values)
                                     }}

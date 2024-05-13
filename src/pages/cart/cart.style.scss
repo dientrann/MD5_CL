@@ -5,7 +5,7 @@
         margin: 10px 20px;
     }
 
-    button {
+    .Button {
         margin-top: 10px;
         height: 30px;
         padding: 10px;
@@ -14,6 +14,7 @@
         justify-content: center;
         align-items: center;
         border: 1px solid gray;
+
     }
 }
 
@@ -24,6 +25,7 @@
     box-shadow: 0 0 3px 3px rgb(0, 0, 0, 0.3);
     border-radius: 5px;
     margin-top: 10px;
+    animation: fadeIn 1s ease;
 
     .checkBox {
         width: 50px;
@@ -99,6 +101,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: fadeIn 0.5s ease-in-out;
             cursor: pointer;
 
             span {
@@ -136,6 +139,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        animation: fadeIn 0.5s ease-in-out;
         cursor: pointer;
 
         span {
@@ -164,6 +168,7 @@
 
 .Bill {
     margin-top: 20px;
+    min-height: 600px;
 
     .itemBill {
         display: flex;
@@ -229,4 +234,10 @@
             }
         }
     }
+}
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
